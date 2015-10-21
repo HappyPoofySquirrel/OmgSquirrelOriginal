@@ -1,0 +1,36 @@
+user interface options 
+	information
+		general
+		breeds
+		diet     all with lots of pictures 
+		behavior
+		location
+		history
+icons to be accorns 
+	
+photos/wallpapers 
+	download image button 
+	vote up button 
+	
+		
+sound board
+	option to set as ringtone 
+
+gps functionality 
+	notify when coming to a high squirrel concentration area 
+	mark where you saw a squirrel 
+	
+check android api when installing 
+		https://developer.xamarin.com/guides/android/application_fundamentals/understanding_android_api_levels/#sdk
+
+
+
+option to display a random squirrel fact on desktop if your device everyday 
+
+
+
+
+
+mt hope mid ohio alternative animal sale 
+hooblie
+ 
