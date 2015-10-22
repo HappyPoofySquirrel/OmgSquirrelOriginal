@@ -32,7 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Over 200 species of squirrels live throughout the world, with many different species residing within the United States. The United States is home to five different types of squirrels; fox, gray, red, flying and ground. Some live in the trees, some live in the ground and others appear to fly. Tree squirrels generally have bushy tails, sharp claws and large ears, while ground squirrels have shorter legs and less bushy fur. Flying squirrels have a furred membrane between their wrists and ankles that allow them to glide between trees"
+        android:text="Over 200 speckies of squirrels live throughout the world, with many different species residing within the United States. The United States is home to five different types of squirrels; fox, gray, red, flying and ground. Some live in the trees, some live in the ground and others appear to fly. Tree squirrels generally have bushy tails, sharp claws and large ears, while ground squirrels have shorter legs and less bushy fur. Flying squirrels have a furred membrane between their wrists and ankles that allow them to glide between trees"
         android:id="@+id/textView3"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
