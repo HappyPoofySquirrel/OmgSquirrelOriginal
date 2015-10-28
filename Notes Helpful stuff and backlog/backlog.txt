@@ -1,4 +1,4 @@
-user interface options 
+ser interface options 
 	information
 		general
 		breeds
@@ -34,3 +34,10 @@ option to display a random squirrel fact on desktop if your device everyday
 mt hope mid ohio alternative animal sale 
 hooblie
  
+
+
+
+current .........................
+assembly facts
+adding bullets
+make page scrollable     only can show a certain amount of text screen will not scroll down 
