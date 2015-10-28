@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);  //add these 2 lines to display icon
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
 
         Button button = (Button) findViewById(R.id.factsButton);    //added to link button +method below
@@ -27,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToFactsActivity();
+
+            }
+        });
+        Button button2 = (Button) findViewById(R.id.ScrollingFacts);    //added to link button +method below
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToScrollingFacts();
 
             }
         });
@@ -56,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void goToFactsActivity(){
         Intent intent =new Intent(this, FactsActivity.class);
+        startActivity(intent);
+    }
+    private void goToScrollingFacts(){
+        Intent intent =new Intent(this, ScrollingFacts.class);
         startActivity(intent);
     }
 
