@@ -28,7 +28,7 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="270dp"
         android:textColor="#fe3700" />
 
     <TextView
@@ -86,7 +86,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginBottom="32dp" />
 
     <TextView
         android:layout_width="fill_parent"
