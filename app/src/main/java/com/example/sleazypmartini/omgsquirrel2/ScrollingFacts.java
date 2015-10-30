@@ -17,6 +17,7 @@ public class ScrollingFacts extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);  //add these 2 lines to display icon
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        getSupportActionBar().setTitle("Info");
 
 
     }
