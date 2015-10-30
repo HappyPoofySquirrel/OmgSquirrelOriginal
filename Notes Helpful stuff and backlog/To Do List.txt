@@ -1,0 +1,26 @@
+1. assemble facts
+   catergerios
+	general 
+	breeds   //add picture then link there information
+	sqiorrels as pets 
+	random
+2. put into webview format
+3. add javasript
+
+facts
+
+
+katie - general 
+eastern grey
+western grey
+african pygmy
+flying squirrel
+  
+
+
+guyver- 
+black 
+red 
+black rock
+fox
+giant indian purple

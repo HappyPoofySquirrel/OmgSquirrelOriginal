@@ -23,6 +23,11 @@
             android:label="@string/title_activity_facts"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".ScrollingFacts"
+            android:label="@string/title_activity_scrolling_facts"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

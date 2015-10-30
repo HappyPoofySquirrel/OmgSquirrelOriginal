@@ -10,6 +10,7 @@
     tools:showIn="@layout/activity_facts"
     tools:context="com.example.sleazypmartini.omgsquirrel2.FactsActivity">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
