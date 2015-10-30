@@ -28,13 +28,13 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="250dp"
         android:textColor="#fe3700" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:text="Over 200 species of squirrel live throughout the world, with many different species residing within the United States. The United States is home to five different types of squirrels; fox, gray, red, flying, and ground. Some live in the trees, some live in the ground and others appear to fly. Tree squirrels generally have bushy tails, sharp claws and large ears, while ground squirrels have shorter legs and less bushy fur. Flying squirrels have a furred membrane between their wrists and ankles that allow them to glide between trees"
+        android:text="Squirrels are familiar creatures to many of us. We see them day-in and day-out, scurrying up trees or running across the road, but how much do we really know about them? There are more than 200 species of squirrels, with weights ranging from 0.35 oz to 18 lbs and lengths from 5 inches up to 3 feet. They are indigenous to regions as diverse as the Americas, Eurasia, and Africa, and they have even been introduced to Australia. They subsist mainly on nuts and seeds, but sometimes also eat insects or small vertebrates. Squirrels can be categorized as one of three types: tree squirrels, ground squirrels or flying squirrels."
         android:id="@+id/textView3"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
@@ -86,7 +86,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="32dp"/>
 
     <TextView
         android:layout_width="fill_parent"
