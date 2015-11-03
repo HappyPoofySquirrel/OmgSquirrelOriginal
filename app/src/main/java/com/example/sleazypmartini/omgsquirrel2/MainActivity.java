@@ -40,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        Button button3 = (Button) findViewById(R.id.Gallery);    //added to link button +method below
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToGalleryActivity();
+
+            }
+        });
 
     }
 
@@ -72,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent =new Intent(this, ScrollingFacts.class);
         startActivity(intent);
     }
-
+    private void goToGalleryActivity(){
+        Intent intent =new Intent(this, GalleryActivity.class);
+        startActivity(intent);
+    }
 
 }
