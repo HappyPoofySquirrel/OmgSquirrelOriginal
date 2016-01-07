@@ -8,6 +8,9 @@
 
     </string>
     <string name="title_activity_gallery">GalleryActivity</string>
+    <string name="title_activity_flikr">flikr</string>
+    <string name="title_activity_grid_view">GridView</string>
+    <string name="title_activity_usage_example_adapter">UsageExampleAdapter</string>
 
 
 </resources>

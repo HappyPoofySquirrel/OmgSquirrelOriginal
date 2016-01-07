@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sleazypmartini.omgsquirrel2" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,17 +17,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <uses-permission android:name=
-                    "android.permission.INTERNET" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".FactsActivity"
             android:label="@string/title_activity_facts"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".ScrollingFacts"
@@ -37,7 +35,16 @@
             android:label="@string/title_activity_gallery"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".GridViewActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".DetailsActivity" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

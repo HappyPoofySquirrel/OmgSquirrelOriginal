@@ -4,6 +4,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
+    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         applicationId "com.example.sleazypmartini.omgsquirrel2"
         minSdkVersion 15
@@ -24,4 +26,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
+
+
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
+
+

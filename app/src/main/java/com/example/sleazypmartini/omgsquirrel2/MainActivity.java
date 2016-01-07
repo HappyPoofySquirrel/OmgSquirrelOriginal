@@ -1,7 +1,7 @@
 package com.example.sleazypmartini.omgsquirrel2;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,14 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        Button button2 = (Button) findViewById(R.id.ScrollingFacts);    //added to link button +method below
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToScrollingFacts();
 
-            }
-        });
+
+
+      //  Button button2 = (Button) findViewById(R.id.ScrollingFacts);    //added to link button +method below
+      //  button2.setOnClickListener(new View.OnClickListener() {
+      //      @Override
+      //      public void onClick(View v) {
+      //          goToScrollingFacts();
+
+       //     }
+      //  });
         Button button3 = (Button) findViewById(R.id.Gallery);    //added to link button +method below
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +52,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button button4 = (Button) findViewById(R.id.GridView);    //added to link button +method below
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToGridViewActivity();
+
+            }
+        });
+
+
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,5 +100,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent =new Intent(this, GalleryActivity.class);
         startActivity(intent);
     }
+    private void goToGridViewActivity(){
+        Intent intent =new Intent(this, GridViewActivity.class);
+        startActivity(intent);
+    }
+
+
+
 
 }
