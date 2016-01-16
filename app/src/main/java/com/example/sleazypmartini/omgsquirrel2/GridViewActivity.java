@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,7 +30,7 @@ public class GridViewActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private GridViewAdapter mGridAdapter;
     private ArrayList<GridItem> mGridData;
-    private String FEED_URL = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=206dcb0ade4879da809339697bb014e3&photoset_id=72157661135553275&user_id=137813339%40N03&format=json&nojsoncallback=1&auth_token=72157663290515282-01572e12a642b83f&api_sig=3ff57d063f8af8e088599c7fd2d5a553";
+    private String FEED_URL = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=3276d71d464eceb3a866f776aa28f8ff&photoset_id=72157661135553275&user_id=137813339%40N03&format=json&nojsoncallback=1&auth_token=72157663461355411-5053fea614d4bc6f&api_sig=bd0f16a634494987f119223e56edd6a9";
 
 
     @Override
@@ -56,19 +54,20 @@ public class GridViewActivity extends AppCompatActivity {
                 //Get item at position
                 GridItem item = (GridItem) parent.getItemAtPosition(position);
 
+
                 Intent intent = new Intent(GridViewActivity.this, DetailsActivity.class);
                 ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
-
-                // Interesting data to pass across are the thumbnail size/location, the
-                // resourceId of the source bitmap, the picture description, and the
-                // orientation (to avoid returning back to an obsolete configuration if
-                // the device rotates again in the meantime)
-
                 int[] screenLocation = new int[2];
                 imageView.getLocationOnScreen(screenLocation);
 
+
                 //Pass the image title and url to DetailsActivity
-                intent.putExtra("image", item.getImage());
+                intent.putExtra("left", screenLocation[0]).
+                        putExtra("top", screenLocation[1]).
+                        putExtra("width", imageView.getWidth()).
+                        putExtra("height", imageView.getHeight()).
+                        putExtra("title", item.getTitle()).
+                        putExtra("image", item.getImage());
 
                 //Start details activity
                 startActivity(intent);
@@ -86,14 +85,15 @@ public class GridViewActivity extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(String... params) {
-            Integer result = 0;
+        Integer result = 0;
             try {
                 // Create Apache HttpClient
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpResponse httpResponse = httpclient.execute(new HttpGet(params[0]));
                 int statusCode = httpResponse.getStatusLine().getStatusCode();
 
-                // 200 represents HTTP OK
+
+               // 200 represents HTTP OK
                 if (statusCode == 200) { //was ==
                     String response = streamToString(httpResponse.getEntity().getContent());
                     parseResult(response);
@@ -105,6 +105,7 @@ public class GridViewActivity extends AppCompatActivity {
                 Log.d(TAG, e.getLocalizedMessage());
             }
             return result;
+
         }
 
         @Override  //this happens last
@@ -120,85 +121,54 @@ public class GridViewActivity extends AppCompatActivity {
     }
 
     String streamToString(InputStream stream) throws IOException {
-
-        BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(stream));
-        StringBuilder stringBuilder = new StringBuilder();
         String result="";
-        String stringReadLine = null;
-        while ((stringReadLine = bufferedreader.readLine()) != null)                     {
-            stringBuilder.append(stringReadLine + "\n");
-        }
-        result = stringBuilder.toString();
+        try {
+            BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(stream));
+            StringBuilder stringBuilder = new StringBuilder();
 
+            String stringReadLine;
+            while ((stringReadLine = bufferedreader.readLine()) != null) {
+                stringBuilder.append(stringReadLine + "\n");
+            }
+            if (null != stream) {
+                stream.close();
+            }
+            result += stringBuilder.toString();
+
+        } catch (Exception e) {
+            Log.e("Buffer Error", "Error converting result " + e.toString());
+        }
         return result;
     }
-
-    /**
-     * Parsing the feed results and get the list
-     * @param result
-     **/
-
+     // Parsing the feed results and get the list
+     // @param result
 
     void parseResult(String result) {
-        GridItem item =null;
+
         try {
             JSONObject response = new JSONObject(result);
             JSONObject photoSet = response.getJSONObject("photoset");
             JSONArray photos = photoSet.getJSONArray("photo");
 
-
+            GridItem item;
             for (int i = 0; i < photos.length(); i++) {
-
+                item = new GridItem();
                 JSONObject temp_photo = photos.optJSONObject(i);
-
                 String id = temp_photo.getString("id");
                 String secret = temp_photo.getString("secret");
                 String server = temp_photo.getString("server");
                 String farm = temp_photo.getString("farm");
                 String title = temp_photo.getString("title");
 
-
-
-                        item.setImage("http://farm" + farm + ".static.flickr.com/" + server + "/" + id + "_" + secret + ".jpg");
+                item.setTitle(title);
+                item.setImage("http://farm" + farm + ".static.flickr.com/" + server + "/" + id + "_" + secret + ".jpg");
 
                 mGridData.add(item);
-
             }
-
 
         } catch (JSONException e) {
    Log.d("didn't work","Try again");
-            Log.e("JSON Parser", "Error parsing data " + e.toString());
             e.printStackTrace();
         }
-
-
     }
-
-    /**
-     * Parsing the feed results and get the list
-     * @param result
-     */
-  /**  private void parseResult(String result) {
-        try {
-            JSONObject response = new JSONObject(result);
-            JSONArray photos = response.optJSONArray("photo");
-            GridItem item;
-            for (int i = 0; i < photos.length(); i++) {
-                JSONObject photo = photos.getJSONObject(i);
-                item = new GridItem();
-
-                String farm_id = photo.getString(farm_id);
-                String server_id = photo.getString(server_id);
-                String id = photo.getString(id);
-                String secret = photo.getString(secret);
-
-                item.setImage("http://farm" + item.farm_id + ".static.flickr.com/" + item.server_id + "/" + item.id + "_" + item.secret + "_m.jpg");
-
-                mGridData.add(item);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    } **/
 }

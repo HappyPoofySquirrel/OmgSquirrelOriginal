@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
        //     }
       //  });
-        Button button3 = (Button) findViewById(R.id.Gallery);    //added to link button +method below
+        Button button3 = (Button) findViewById(R.id.GridView);    //added to link button +method below
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
