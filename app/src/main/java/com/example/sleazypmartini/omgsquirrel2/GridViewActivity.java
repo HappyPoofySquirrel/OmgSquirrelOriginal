@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,7 +30,7 @@ public class GridViewActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private GridViewAdapter mGridAdapter;
     private ArrayList<GridItem> mGridData;
-    private String FEED_URL = "http://javatechig.com/?json=get_recent_posts&count=45";
+    private String FEED_URL = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&oauth_consumer_key=54f1d0146bcec3b405164e253e8ff710&photoset_id=72157661135553275&user_id=137813339%40N03&format=json&nojsoncallback=1&oauth_token=72157663053868089-63166f4e59a184ca&api_sig=d50c3cc7a51f089c28c3efe145e22b6f4aa95f0c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +53,20 @@ public class GridViewActivity extends AppCompatActivity {
                 //Get item at position
                 GridItem item = (GridItem) parent.getItemAtPosition(position);
 
+
                 Intent intent = new Intent(GridViewActivity.this, DetailsActivity.class);
                 ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
-
-                // Interesting data to pass across are the thumbnail size/location, the
-                // resourceId of the source bitmap, the picture description, and the
-                // orientation (to avoid returning back to an obsolete configuration if
-                // the device rotates again in the meantime)
-
                 int[] screenLocation = new int[2];
                 imageView.getLocationOnScreen(screenLocation);
 
+
                 //Pass the image title and url to DetailsActivity
-                intent.putExtra("image", item.getImage());
+                intent.putExtra("left", screenLocation[0]).
+                        putExtra("top", screenLocation[1]).
+                        putExtra("width", imageView.getWidth()).
+                        putExtra("height", imageView.getHeight()).
+                        putExtra("title", item.getTitle()).
+                        putExtra("image", item.getImage());
 
                 //Start details activity
                 startActivity(intent);
@@ -82,79 +81,92 @@ public class GridViewActivity extends AppCompatActivity {
     //Downloading data asynchronously
     public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
+
         @Override
         protected Integer doInBackground(String... params) {
-            Integer result = 0;
+        Integer result = 0;
             try {
                 // Create Apache HttpClient
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpResponse httpResponse = httpclient.execute(new HttpGet(params[0]));
                 int statusCode = httpResponse.getStatusLine().getStatusCode();
 
-                // 200 represents HTTP OK
-                if (statusCode == 200) {
+
+               // 200 represents HTTP OK
+                if (statusCode == 200) { //was ==
                     String response = streamToString(httpResponse.getEntity().getContent());
                     parseResult(response);
                     result = 1; // Successful
                 } else {
-                    result = 0; //"Failed
-                }
+                    result = 0;
+                     }
             } catch (Exception e) {
                 Log.d(TAG, e.getLocalizedMessage());
             }
             return result;
+
         }
 
-        @Override
-        protected void onPostExecute(Integer result) {
+        @Override  //this happens last
+        protected void onPostExecute(Integer result) { //Integer Result
             // Download complete. Let us update UI
             if (result == 1) {
                 mGridAdapter.setGridData(mGridData);
             } else {
-                Toast.makeText(GridViewActivity.this, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GridViewActivity.this, "Failed to load data, Are you connected to the internet?", Toast.LENGTH_SHORT).show();
             }
-            mProgressBar.setVisibility(View.GONE);
+           mProgressBar.setVisibility(View.GONE);
         }
     }
 
     String streamToString(InputStream stream) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
-        String line;
-        String result = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            result += line;
-        }
+        String result="";
+        try {
+            BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(stream));
+            StringBuilder stringBuilder = new StringBuilder();
 
-        // Close stream
-        if (null != stream) {
-            stream.close();
+            String stringReadLine;
+            while ((stringReadLine = bufferedreader.readLine()) != null) {
+                stringBuilder.append(stringReadLine + "\n");
+            }
+            if (null != stream) {
+                stream.close();
+            }
+            result += stringBuilder.toString();
+
+        } catch (Exception e) {
+            Log.e("Buffer Error", "Error converting result " + e.toString());
         }
         return result;
     }
+     // Parsing the feed results and get the list
+     // @param result
 
-    /**
-     * Parsing the feed results and get the list
-     * @param result
-     */
-    private void parseResult(String result) {
+    void parseResult(String result) {
+
         try {
             JSONObject response = new JSONObject(result);
-            JSONArray posts = response.optJSONArray("posts");
-            GridItem item;
-            for (int i = 0; i < posts.length(); i++) {
-                JSONObject post = posts.optJSONObject(i);
-                String title = post.optString("title");
-                item = new GridItem();
+            JSONObject photoSet = response.getJSONObject("photoset");
+            JSONArray photos = photoSet.getJSONArray("photo");
 
-                JSONArray attachments = post.getJSONArray("attachments");
-                if (null != attachments && attachments.length() > 0) {
-                    JSONObject attachment = attachments.getJSONObject(0);
-                    if (attachment != null)
-                        item.setImage(attachment.getString("url"));
-                }
+            GridItem item;
+            for (int i = 0; i < photos.length(); i++) {
+                item = new GridItem();
+                JSONObject temp_photo = photos.optJSONObject(i);
+                String id = temp_photo.getString("id");
+                String secret = temp_photo.getString("secret");
+                String server = temp_photo.getString("server");
+                String farm = temp_photo.getString("farm");
+                String title = temp_photo.getString("title");
+
+                item.setTitle(title);
+                item.setImage("http://farm" + farm + ".static.flickr.com/" + server + "/" + id + "_" + secret + ".jpg");
+
                 mGridData.add(item);
             }
+
         } catch (JSONException e) {
+   Log.d("didn't work","Try again");
             e.printStackTrace();
         }
     }

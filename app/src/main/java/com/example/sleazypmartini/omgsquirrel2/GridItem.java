@@ -2,7 +2,7 @@ package com.example.sleazypmartini.omgsquirrel2;
 
 public class GridItem {
     private String image;
-
+    private String title;
 
     public GridItem() {
         super();
@@ -16,5 +16,11 @@ public class GridItem {
         this.image = image;
     }
 
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

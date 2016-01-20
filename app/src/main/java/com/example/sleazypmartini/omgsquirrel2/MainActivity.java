@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
        //     }
       //  });
-        Button button3 = (Button) findViewById(R.id.Gallery);    //added to link button +method below
+        Button button3 = (Button) findViewById(R.id.GridView);    //added to link button +method below
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
