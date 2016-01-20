@@ -30,8 +30,7 @@ public class GridViewActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private GridViewAdapter mGridAdapter;
     private ArrayList<GridItem> mGridData;
-    private String FEED_URL = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=3276d71d464eceb3a866f776aa28f8ff&photoset_id=72157661135553275&user_id=137813339%40N03&format=json&nojsoncallback=1&auth_token=72157663461355411-5053fea614d4bc6f&api_sig=bd0f16a634494987f119223e56edd6a9";
-
+    private String FEED_URL = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&oauth_consumer_key=54f1d0146bcec3b405164e253e8ff710&photoset_id=72157661135553275&user_id=137813339%40N03&format=json&nojsoncallback=1&oauth_token=72157663053868089-63166f4e59a184ca&api_sig=d50c3cc7a51f089c28c3efe145e22b6f4aa95f0c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +113,7 @@ public class GridViewActivity extends AppCompatActivity {
             if (result == 1) {
                 mGridAdapter.setGridData(mGridData);
             } else {
-                Toast.makeText(GridViewActivity.this, "Failed to load data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GridViewActivity.this, "Failed to load data, Are you connected to the internet?", Toast.LENGTH_SHORT).show();
             }
            mProgressBar.setVisibility(View.GONE);
         }

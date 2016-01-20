@@ -18,10 +18,19 @@ package com.example.sleazypmartini.omgsquirrel2;
         import android.widget.FrameLayout;
 
 
+
+        import android.os.Bundle;
+        import android.app.Activity;
+        import android.view.Menu;
+
+
+
+
 public class DetailsActivity extends AppCompatActivity {
     private static final int ANIM_DURATION = 600;
     private TextView titleTextView;
     private ImageView imageView;
+
 
     private int mLeftDelta;
     private int mTopDelta;
@@ -36,6 +45,7 @@ public class DetailsActivity extends AppCompatActivity {
     private int thumbnailWidth;
     private int thumbnailHeight;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +55,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+
 
         //retrieves the thumbnail data
         Bundle bundle = getIntent().getExtras();
@@ -63,6 +75,11 @@ public class DetailsActivity extends AppCompatActivity {
         //Set image url
         imageView = (ImageView) findViewById(R.id.grid_item_image);
         Picasso.with(this).load(image).into(imageView);
+
+        //TouchImageView img = new TouchImageView(this);
+       // img.setImageResource(image);
+        //img.setMaxZoom(4f);
+        //setContentView(img);
 
         //Set the background color to black
         frameLayout = (FrameLayout) findViewById(R.id.main_background);
@@ -98,6 +115,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+
     /**
      * The enter animation scales the picture in from its previous thumbnail
      * size/location.
@@ -121,10 +139,10 @@ public class DetailsActivity extends AppCompatActivity {
         imageView.animate().setDuration(ANIM_DURATION).scaleX(1).scaleY(1).
                 translationX(0).translationY(0).setInterpolator(sDecelerator);
 
-        // Fade in the black background
-        ObjectAnimator bgAnim = ObjectAnimator.ofInt(colorDrawable, "alpha", 0, 255);
-        bgAnim.setDuration(ANIM_DURATION);
-        bgAnim.start();
+        // Fade in the black background  //was making screen flash white before
+        //ObjectAnimator bgAnim = ObjectAnimator.ofInt(colorDrawable, "alpha", 0, 255);
+        //bgAnim.setDuration(ANIM_DURATION);
+        //bgAnim.start();
 
     }
 
@@ -143,9 +161,9 @@ public class DetailsActivity extends AppCompatActivity {
                 .setInterpolator(sInterpolator).withEndAction(endAction);
 
         // Fade out background
-        ObjectAnimator bgAnim = ObjectAnimator.ofInt(colorDrawable, "alpha", 0);
-        bgAnim.setDuration(ANIM_DURATION);
-        bgAnim.start();
+        //ObjectAnimator bgAnim = ObjectAnimator.ofInt(colorDrawable, "alpha", 0);
+        //bgAnim.setDuration(ANIM_DURATION);
+        //bgAnim.start();
     }
 
     @Override
