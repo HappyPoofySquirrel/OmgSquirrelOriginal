@@ -1,5 +1,6 @@
 package com.example.sleazypmartini.omgsquirrel2;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import java.io.BufferedReader;
@@ -16,6 +17,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.sleazypmartini.omgsquirrel2.util.DialogFactory;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -25,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GridViewActivity extends AppCompatActivity {
+    Context mContext;
+
     private static final String TAG = GridViewActivity.class.getSimpleName();
     private GridView mGridView;
     private ProgressBar mProgressBar;
@@ -39,6 +45,7 @@ public class GridViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);  //add these 2 lines to display icon
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
+        mContext = this;
         mGridView = (GridView) findViewById(R.id.gridView);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -113,7 +120,7 @@ public class GridViewActivity extends AppCompatActivity {
             if (result == 1) {
                 mGridAdapter.setGridData(mGridData);
             } else {
-                Toast.makeText(GridViewActivity.this, "Failed to load data, Are you connected to the internet?", Toast.LENGTH_SHORT).show();
+                DialogFactory.newOneBtnAlert(mContext, "Failed to load data, Check your internet connection");
             }
            mProgressBar.setVisibility(View.GONE);
         }
